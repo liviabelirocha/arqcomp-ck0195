@@ -403,7 +403,7 @@ void exibicao()
     cout << "      " << H
          << "\nMPC :\t\t\t  ";
     print(&md.Prox_MicInstruc, 5);
-    cout << "          " << md.Prox_MicInstruc << endl;
+    cout << "          " << std::hex << md.Prox_MicInstruc << endl;
 
     cout << "\nMIR :  ";
     print(&MIR, 4);

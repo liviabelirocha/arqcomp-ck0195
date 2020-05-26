@@ -42,7 +42,8 @@ struct microinstrucao_decodificada
     Memoria = 3 bits
     Barramento_B = 4 bits
     */
-    palavra Prox_MicInstruc = 0, Barramento_C;
+    palavra Prox_MicInstruc = 0, //MPC
+        Barramento_C;
     byte Salto, Deslocador, Operacao, Memoria, Barramento_B;
 };
 microinstrucao_decodificada md;
@@ -140,7 +141,7 @@ void atribuicaoMicroinstrucao()
     md.Memoria = (MIR >> 4) & 0b111;
     md.Barramento_C = (MIR >> 7) & 0b111111111;
     md.Operacao = (MIR >> 16) & 0b111111;
-    md.Deslocador = (MIR >> 24) & 0b11;
+    md.Deslocador = (MIR >> 22) & 0b11;
     md.Salto = (MIR >> 24) & 0b111;
     md.Prox_MicInstruc = (MIR >> 27) & 0b111111111;
 }
@@ -323,9 +324,9 @@ void oprMemoria()
 void saltar()
 {
     if (md.Salto & 0b001)
-        md.Prox_MicInstruc = md.Prox_MicInstruc | (N << 8);
-    if (md.Salto & 0b010)
         md.Prox_MicInstruc = md.Prox_MicInstruc | (Z << 8);
+    if (md.Salto & 0b010)
+        md.Prox_MicInstruc = md.Prox_MicInstruc | (N << 8);
     if (md.Salto & 0b100)
         md.Prox_MicInstruc = md.Prox_MicInstruc | (MBR);
 }
@@ -338,7 +339,7 @@ void exibicao()
     {
         cout << "\nPILHA DE OPERANDOS\n";
 
-        cout << "\n   BINÁRIO\t\t\t\tENDEREÇO    HEX\n";
+        cout << "\n   BINÁRIO\t\t\t\tENDEREÇO    INT\n";
 
         for (unsigned int i = SP; i >= LV; i--)
         {
@@ -370,40 +371,40 @@ void exibicao()
     cout << "\nREGISTRADORES";
 
     ;
-    cout << "\n\n\t\t\t  BINÁRIO\t       HEX\n"
+    cout << "\n\n\t\t\t  BINÁRIO\t       INT\n"
          << "\nMAR :  ";
     print(&MAR, 3);
-    cout << "      " << std::hex << MAR
+    cout << "      " << MAR
          << "\nMDR :  ";
     print(&MDR, 3);
-    cout << "      " << std::hex << MDR
+    cout << "      " << MDR
          << "\nPC  :  ";
     print(&PC, 3);
-    cout << "      " << std::hex << PC
+    cout << "      " << PC
          << "\nMBR :\t\t\t       ";
     print(&MBR, 2);
     cout << "      " << (palavra)MBR
          << "\nSP  :  ";
     print(&SP, 3);
-    cout << "      " << std::hex << SP
+    cout << "      " << SP
          << "\nLV  :  ";
     print(&LV, 3);
-    cout << "      " << std::hex << LV
+    cout << "      " << LV
          << "\nCPP :  ";
     print(&CPP, 3);
-    cout << "      " << std::hex << CPP
+    cout << "      " << CPP
          << "\nTOS :  ";
     print(&TOS, 3);
-    cout << "      " << std::hex << TOS
+    cout << "      " << TOS
          << "\nOPC :  ";
     print(&OPC, 3);
-    cout << "      " << std::hex << OPC
+    cout << "      " << OPC
          << "\nH   :  ";
     print(&H, 3);
     cout << "      " << H
          << "\nMPC :\t\t\t  ";
     print(&md.Prox_MicInstruc, 5);
-    cout << "          " << std::hex << md.Prox_MicInstruc << endl;
+    cout << "          " << md.Prox_MicInstruc << endl;
 
     cout << "\nMIR :  ";
     print(&MIR, 4);

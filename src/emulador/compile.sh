@@ -1,6 +1,6 @@
 #!/bin/bash
 
-g++ -Wall -Wextra -pedantic -std=c++17 emulador.cpp -o main.out && ./main.out
+g++ -Wall -Wextra -pedantic -std=c++17 emulador.cpp -o main.out
 
 RET=$?
 

@@ -50,7 +50,7 @@ microinstrucao_decodificada md;
 
 /*Protótipo das funções*/
 bool carregarArmazenamentoDeControle();
-bool carregarPrograma();
+bool carregarPrograma(char *prog);
 
 void atribuicaoMicroinstrucao();
 void atribuicaoB();
@@ -64,9 +64,10 @@ void saltar();
 void exibicao();
 void print(void *valor, int tipo);
 
-int main()
+int main(int argc, char *argv[])
 {
-    if (carregarArmazenamentoDeControle() || carregarPrograma())
+    (void)argc;
+    if (carregarArmazenamentoDeControle() || carregarPrograma(argv[1]))
         return 1;
 
     while (true)
@@ -114,12 +115,12 @@ bool carregarArmazenamentoDeControle()
     return true;
 }
 
-bool carregarPrograma()
+bool carregarPrograma(char *prog)
 {
     FILE *programa;
     byte tamanho_temp[4];
     palavra tamanho;
-    programa = fopen("prog.exe", "rb");
+    programa = fopen(prog, "rb");
 
     if (programa)
     {

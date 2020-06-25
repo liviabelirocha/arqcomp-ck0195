@@ -3,9 +3,9 @@
 Para executar o emulador
 
 ```
-$ ./compile
+$ ./compile.sh
 ```
 
 ```
-$ ./main prog.exe
+$ ./main program.exe
 ```

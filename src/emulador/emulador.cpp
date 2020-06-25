@@ -332,6 +332,7 @@ void saltar()
         md.Prox_MicInstruc = md.Prox_MicInstruc | (MBR);
 }
 
+//Funções de exibição e print foram feitas de forma diferente da passada pelo professor, mas não alteram em nada a leitura dos dados
 void exibicao()
 {
     system("clear");

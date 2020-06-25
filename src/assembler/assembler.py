@@ -4,6 +4,7 @@ import struct
 from instructions import instructions
 
 class Assembler:
+    #Inicialização do Assembler
     def __init__(self):
         self.program = []
         self.byte_array = []
@@ -15,10 +16,12 @@ class Assembler:
         self.line_counter = 0
         self.next = 0
 
+    #Função para lidar com erros e encerrar o programa
     def throw_error(self, function, message):
         print(f"ERRO! Na função {function}. {message} na linha {self.line_counter}")
         sys.exit()
 
+    #Abre o arquivo e o coloca dentro de program, separando por linhas
     def open_asm(self):
         try:
             with open(sys.argv[1], 'r') as prog:
@@ -66,7 +69,8 @@ class Assembler:
             check = True
 
             for i in range (0, number_of_operands):
-                if operand_types[i] == 'varnum':        #Precisa ser seguido de uma variável
+                if operand_types[i] == 'varnum':
+                    #Precisa ser seguido de uma variável
                     if operand[i] not in self.vars:
                         check = False
     

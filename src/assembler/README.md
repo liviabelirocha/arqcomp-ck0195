@@ -1,5 +1,6 @@
 # Assembler - Mac 1
 
+O assembler irá gerar um `.exe` de mesmo nome do programa escrito em assembly.
 Para executar o assembler
 
 ```
